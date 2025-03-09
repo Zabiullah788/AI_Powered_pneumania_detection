@@ -1,0 +1,11 @@
+you can download the dataset from the given link.
+
+https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+
+Note: you have to change the order of the data as here the data is not present in best sequence and for the better results using this code you have to change the order of data in 80-10-10 form.
+
+80% for training
+10% for Testing
+10% for Validation
+
+best of Luck! 

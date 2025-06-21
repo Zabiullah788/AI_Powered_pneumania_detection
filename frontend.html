@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pneumonia Detection System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #fce4ec);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #2c3e50;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(to right, #0077b6, #00b4d8);
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .main-layout {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 30px 20px;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 280px;
+      max-width: 350px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .card img {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      color: #3949ab;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .card ul {
+      text-align: left;
+      padding-left: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .form-card {
+      background: #f8f9fa;
+      border: 2px dashed #90caf9;
+    }
+
+    form input[type="file"] {
+      margin: 15px 0;
+    }
+
+    form input[type="submit"] {
+      padding: 12px 28px;
+      border: none;
+      background: linear-gradient(to right, #42a5f5, #478ed1);
+      color: white;
+      font-size: 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    form input[type="submit"]:hover {
+      background: linear-gradient(to right, #478ed1, #42a5f5);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #4caf50;
+    }
+
+    .preview-img {
+      margin-top: 20px;
+      width: 280px;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      margin-top: auto;
+      background: #263238;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 992px) {
+      .main-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .preview-img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🧠 Pneumonia Detection System</h1>
+  </header>
+
+  <div class="main-layout">
+    <!-- Left Card: What is Pneumonia -->
+    <div class="card">
+      <img src="https://img.icons8.com/fluency/96/stethoscope.png" alt="Stethoscope Icon">
+      <h2>What is Pneumonia?</h2>
+      <p>
+        Pneumonia is an infection that inflames the air sacs in one or both lungs, which may fill with fluid.
+        It can be life-threatening, especially for infants and older adults. Early detection is crucial.
+      </p>
+    </div>
+
+    <!-- Center Card: Upload & Predict -->
+    <div class="card form-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="X-ray Icon">
+      <form method="post" action="/predict" enctype="multipart/form-data">
+        <h2>Upload Chest X-ray</h2>
+        <input type="file" name="file" accept="image/*" required><br>
+        <input type="submit" value="Detect Pneumonia">
+      </form>
+
+      {% if prediction %}
+      <div class="result">
+        Prediction: {{ prediction }}<br>
+        Confidence: {{ '%.2f'|format(confidence) }}%
+      </div>
+      <img class="preview-img" src="{{ image_url }}" alt="Uploaded X-ray">
+      {% endif %}
+    </div>
+
+    <!-- Right Card: Precautions -->
+    <div class="card">
+      <img src="https://img.icons8.com/fluency/96/lungs.png" alt="Lungs Icon">
+      <h2>Precautionary Measures</h2>
+      <ul>
+        <li>Get vaccinated for flu & pneumonia</li>
+        <li>Wash hands regularly</li>
+        <li>Quit smoking</li>
+        <li>Eat nutritious food</li>
+        <li>Consult doctor if symptoms worsen</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    Developed by Zabi Ullah, Nisar Ahmed, Naveed Ahmed, and Mohaib Ullah
+  </footer>
+
+</body>
+</html>
